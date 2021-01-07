@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: portal-configmap
+data:
+#Chave : Valor
+#O ip no caso do linux e o que se encontra no comando
+# sudo kubectl get nodes
+#Localhost para windows
+  IP_SISTEMA: localhost:3001

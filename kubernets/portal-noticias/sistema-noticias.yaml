@@ -12,3 +12,6 @@ spec:
       #Portas do container
       ports:
         - containerPort: 80
+      envFrom: #Importa o configmap para o Pod
+        - configMapRef:
+          name: sistema-configmap
