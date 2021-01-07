@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-portal-noticias
+spec:
+  type: NodePort #Para acessar de fora do cluster
+  ports:
+    #Somente a porta para com.. entrada e saida
+  - port: 80
+    #Porta do nó pode ser definida entre 30000 e 32767
+    nodePort: 30001
+  selector: #seletor do servico
+    app: portal-noticias

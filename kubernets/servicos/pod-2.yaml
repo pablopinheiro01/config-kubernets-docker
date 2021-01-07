@@ -1,0 +1,15 @@
+apiVersion: v1
+#Tipo que estou criando
+kind: Pod
+metadata:
+  name: pod-2
+  labels:
+    #Possod definir qualquer chave: valor
+    app: segundo-pod
+spec:
+  containers:
+  #Nome do container e a sua imagem
+    - name: container-pod-2
+      image: nginx:latest
+      ports:
+        - containerPort: 80

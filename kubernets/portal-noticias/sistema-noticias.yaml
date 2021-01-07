@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sistema-noticias
+  #Para definir um servico vou definir uma label
+  labels:
+    app: sistema-noticias
+spec:
+  containers:
+    - name: sistema-noticias-container
+      image: aluracursos/sistema-noticias:1
+      #Portas do container
+      ports:
+        - containerPort: 80
