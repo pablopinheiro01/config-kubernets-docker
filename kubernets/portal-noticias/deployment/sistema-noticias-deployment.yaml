@@ -22,6 +22,27 @@ spec:
           envFrom: #Importa o configmap para o Pod
             - configMapRef:
                 name: sistema-configmap
+          livenessProbe:
+            httpGet:
+              #caminho da rota localhost:30000/
+              path: /
+              #Porta em que o container esta respondendo a aplicacao
+              port: 80
+              #Em quanto tempo o teste deve ser feito
+            periodSeconds: 10
+            #n maximo de falhas para erros no container
+            failureThreshold: 3
+            #Em quanto tempo o container deve executar o primeiro teste apos subir
+            initialDelaySeconds: 20
+          #verifica se o servico ja subiu para voltar a utilizacao
+          #Caso nao consiga executar na 4 vez ele enviara as requisicoes ignorando o readnessprobe
+          readinessProbe: 
+            httpGet:
+              path: /inserir_noticias.php
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3
+            initialDelaySeconds: 20
 #Devemos definir o numero de replicas
 #Por padrao o numero e 1
   replicas: 1
