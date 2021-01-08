@@ -7,4 +7,4 @@ data:
 #O ip no caso do linux e o que se encontra no comando
 # sudo kubectl get nodes
 #Localhost para windows
-  IP_SISTEMA: localhost:3001
+  IP_SISTEMA: localhost:30001

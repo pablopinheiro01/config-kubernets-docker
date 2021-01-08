@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+##########################################
+#Esta parte eu posso copiar do arquivo pod
+##########################################
+metadata:
+  name: db-noticias-deployment
+spec:
+  template:
+    metadata:
+      name: db-noticias
+      #Para definir um servico vou definir uma label
+      labels:
+        app: db-noticias
+    spec:
+      containers:
+        - name: db-noticias-container
+          image: aluracursos/mysql-db:1
+          #Portas do container
+          ports:
+            - containerPort: 3306
+          #Importa todo o configmap de acordo com o name
+          envFrom:
+            - configMapRef:
+                name: db-configmap
+##########################################
+#        FIM DA COPIA                    #
+##########################################
+  selector:
+    matchLabels:
+      app: db-noticias

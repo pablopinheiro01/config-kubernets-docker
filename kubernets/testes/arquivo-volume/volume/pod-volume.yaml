@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-volume
+spec:
+  containers:
+  #Nginx
+    - name: nginx-containers
+      image: nginx:latest
+      #Definicao de volume por container
+      volumeMounts:
+        - mountPath: /volume-dentro-do-container
+          name: primeiro-volume
+    #jenkins
+    - name: jenkins-container
+      image: jenkins:latest
+      #Definicao de volume por container
+      volumeMounts:
+        - mountPath: /volume-dentro-do-container
+          name: primeiro-volume
+  #Devemos alinhar com os containers a definicao do volume desses pods
+  volumes:
+    - name: primeiro-volume
+      hostPath:
+      #Esta declara e para o windows no formato do unix
+        path: /C/Users/ppinheiro/Desktop/workspace-docker-kubernets/config-kubernets-docker/kubernets/testes/arquivo-volume
+        type: Directory

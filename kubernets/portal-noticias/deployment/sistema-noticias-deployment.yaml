@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sistema-noticias-deployment
+spec:
+#Definimos um template padrao
+#Aqui vai as informacoes do nosso pod
+  template: #Dados do pod que sera gerenciado
+    metadata: #referente ao pod
+      name: sistema-noticias
+      #Para definir um servico vou definir uma label
+      labels:
+        app: sistema-noticias
+    spec:
+      containers:
+        - name: sistema-noticias-container
+          image: aluracursos/sistema-noticias:1
+      
+        #Portas do container
+          ports:
+            - containerPort: 80
+          envFrom: #Importa o configmap para o Pod
+            - configMapRef:
+                name: sistema-configmap
+#Devemos definir o numero de replicas
+#Por padrao o numero e 1
+  replicas: 1
+  #precisamos informar os recursos que tenham match labels
+  selector:
+    matchLabels:
+      app: sistema-noticias
