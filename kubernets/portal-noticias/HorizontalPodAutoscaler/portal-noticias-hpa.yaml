@@ -1,0 +1,22 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: portal-noticias-hpa
+spec:
+#Trajeto onde quero realizar a escalonamento
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: portal-noticias-deployment
+  minReplicas: 1
+  maxReplicas: 10
+  #Metrica que vamos utilizar para escalonar
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          #Aqui no caso nao vai passar de 50% do valor definido no resource
+          #Cpu definido no meu deployment, no caso nao passara de 5 milicores
+          averageUtilization: 50
